@@ -28,7 +28,7 @@ is not a comparison and none of the absolute numbers transfer.
 | cold-arm prefix-cache hit fraction | **0.0000** |
 
 ```bash
-python3 verify.py      # 16 checks, exits non-zero on any drift
+python3 verify.py      # 17 checks, exits non-zero on any drift
 ```
 
 ## Layout

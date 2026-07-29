@@ -10,7 +10,7 @@ who wants to check a number does not have to take it on trust.
 
 | Study | Registry entries | Verifier |
 |---|---|---|
-| [DSV4-Flash long soak](dsv4-flash-long-soak-20260728/) | traps 105, 106 | `python3 verify.py`, 16 checks |
+| [DSV4-Flash long soak](dsv4-flash-long-soak-20260728/) | traps 105, 106 | `python3 verify.py`, 17 checks |
 | [Nemotron 3 Super 120B soak](nemotron-super-120b-soak-20260728/) | traps 107, 108, trap 12 addendum | `python3 verify.py`, 26 checks |
 
 See [STUDY_INDEX.md](STUDY_INDEX.md) for model revisions, builds, topology and
