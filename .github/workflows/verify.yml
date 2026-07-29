@@ -35,10 +35,13 @@ jobs:
         # the step could never fail. Fixing it exposed trailing whitespace in
         # raw-scrubbed/, which is CAPTURED ENGINE OUTPUT. Stripping it would
         # falsify the raw, which is the one thing those files exist to
-        # preserve, so raw-scrubbed/ is excluded by scope rather than the
-        # check being weakened. Everything we wrote is still checked.
+        # preserve. The same applies to analysis/*.txt, which is captured
+        # tool stdout. Both are excluded by SCOPE rather than the check
+        # being weakened: every markdown, python and yaml file we wrote is
+        # still checked, and that was verified by adding a trailing space to
+        # an authored file and watching this form fail.
         run: |
-          git diff --check "$(git hash-object -t tree /dev/null)" HEAD --             . ':(exclude)*/raw-scrubbed/*'
+          git diff --check "$(git hash-object -t tree /dev/null)" HEAD --             . ':(exclude)*/raw-scrubbed/*' ':(exclude)*/analysis/*.txt'
 
       - name: public-surface scan
         run: python3 tools/public_scan.py .
