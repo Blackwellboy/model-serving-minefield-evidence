@@ -1,0 +1,1 @@
+{"mem": {"node-a": {"avail_mb": 7516, "load1": 1.15, "swap_used_mb": 2769, "total_mb": 124545, "used_mb": 117029}, "node-b": {"avail_mb": 9103, "load1": 0.47, "swap_used_mb": 2631, "total_mb": 124546, "used_mb": 115442}}, "req_i": 0, "ts": "2026-07-28T11:17:43Z"}

@@ -1,0 +1,35 @@
+name: verify
+on:
+  push:
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: DSV4 verifier
+        working-directory: dsv4-flash-long-soak-20260728
+        run: python3 verify.py
+
+      - name: Nemotron verifier
+        working-directory: nemotron-super-120b-soak-20260728
+        run: python3 verify.py
+
+      - name: checksums
+        run: |
+          set -e
+          for d in dsv4-flash-long-soak-20260728 nemotron-super-120b-soak-20260728; do
+            echo "== $d =="
+            (cd "$d" && sha256sum -c SHA256SUMS --quiet)
+          done
+
+      - name: whitespace
+        run: git diff --check HEAD~1 HEAD || git diff --check
+
+      - name: public-surface scan
+        run: python3 tools/public_scan.py .

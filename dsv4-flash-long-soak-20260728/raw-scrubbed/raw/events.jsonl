@@ -1,0 +1,43 @@
+{"baseline_mem": {"node-a": {"avail_mb": 7569, "load1": 2.31, "swap_used_mb": 2769, "total_mb": 124545, "used_mb": 116976}, "node-b": {"avail_mb": 9121, "load1": 1.2, "swap_used_mb": 2630, "total_mb": 124546, "used_mb": 115424}}, "baseline_metrics": {"http_request_duration_highr_seconds_count": 2289.0, "http_requests_total": 2289.0, "process_resident_memory_bytes": 1439494144.0, "vllm:generation_tokens_total": 24684.0, "vllm:kv_cache_usage_perc": 0.6511570165855596, "vllm:num_preemptions_total": 0.0, "vllm:num_requests_running": 0.0, "vllm:num_requests_waiting": 0.0, "vllm:prompt_tokens_total": 7841543.0, "vllm:request_success_total": 215.0, "vllm:spec_decode_num_accepted_tokens_total": 16094.0, "vllm:spec_decode_num_draft_tokens_total": 25803.0, "vllm:spec_decode_num_drafts_total": 8604.0}, "baseline_per_pos": {"0": 6895.0, "1": 5258.0, "2": 3941.0}, "kind": "soak_start", "soak_start": "2026-07-28T11:21:21Z", "ts": "2026-07-28T11:21:24Z", "window_size": 60}
+{"kind": "ttft_baseline", "p50": 0.459, "ts": "2026-07-28T11:27:16Z"}
+{"kind": "window_done", "req_index": 60, "soak_elapsed_s": 926.9, "ts": "2026-07-28T11:36:48Z", "window": 0}
+{"kind": "window_done", "req_index": 120, "soak_elapsed_s": 1841.2, "ts": "2026-07-28T11:52:02Z", "window": 1}
+{"kind": "window_done", "req_index": 180, "soak_elapsed_s": 2765.6, "ts": "2026-07-28T12:07:27Z", "window": 2}
+{"kind": "window_done", "req_index": 240, "soak_elapsed_s": 3685.4, "ts": "2026-07-28T12:22:47Z", "window": 3}
+{"kind": "window_done", "req_index": 300, "soak_elapsed_s": 4606.4, "ts": "2026-07-28T12:38:08Z", "window": 4}
+{"kind": "window_done", "req_index": 360, "soak_elapsed_s": 5544.1, "ts": "2026-07-28T12:53:45Z", "window": 5}
+{"kind": "window_done", "req_index": 420, "soak_elapsed_s": 6447.4, "ts": "2026-07-28T13:08:48Z", "window": 6}
+{"kind": "window_done", "req_index": 480, "soak_elapsed_s": 7373.0, "ts": "2026-07-28T13:24:14Z", "window": 7}
+{"kind": "window_done", "req_index": 540, "soak_elapsed_s": 8297.6, "ts": "2026-07-28T13:39:39Z", "window": 8}
+{"kind": "window_done", "req_index": 600, "soak_elapsed_s": 9239.8, "ts": "2026-07-28T13:55:21Z", "window": 9}
+{"kind": "window_done", "req_index": 660, "soak_elapsed_s": 10170.1, "ts": "2026-07-28T14:10:51Z", "window": 10}
+{"kind": "window_done", "req_index": 720, "soak_elapsed_s": 11101.9, "ts": "2026-07-28T14:26:23Z", "window": 11}
+{"kind": "window_done", "req_index": 780, "soak_elapsed_s": 12018.0, "ts": "2026-07-28T14:41:39Z", "window": 12}
+{"kind": "window_done", "req_index": 840, "soak_elapsed_s": 12935.8, "ts": "2026-07-28T14:56:57Z", "window": 13}
+{"kind": "window_done", "req_index": 900, "soak_elapsed_s": 13844.2, "ts": "2026-07-28T15:12:05Z", "window": 14}
+{"kind": "window_done", "req_index": 960, "soak_elapsed_s": 14761.9, "ts": "2026-07-28T15:27:23Z", "window": 15}
+{"kind": "window_done", "req_index": 1020, "soak_elapsed_s": 15676.6, "ts": "2026-07-28T15:42:38Z", "window": 16}
+{"kind": "window_done", "req_index": 1080, "soak_elapsed_s": 16581.0, "ts": "2026-07-28T15:57:42Z", "window": 17}
+{"kind": "window_done", "req_index": 1140, "soak_elapsed_s": 17509.7, "ts": "2026-07-28T16:13:11Z", "window": 18}
+{"kind": "window_done", "req_index": 1200, "soak_elapsed_s": 18443.5, "ts": "2026-07-28T16:28:45Z", "window": 19}
+{"kind": "window_done", "req_index": 1260, "soak_elapsed_s": 19344.0, "ts": "2026-07-28T16:43:45Z", "window": 20}
+{"kind": "window_done", "req_index": 1320, "soak_elapsed_s": 20265.3, "ts": "2026-07-28T16:59:06Z", "window": 21}
+{"kind": "window_done", "req_index": 1380, "soak_elapsed_s": 21186.0, "ts": "2026-07-28T17:14:27Z", "window": 22}
+{"kind": "window_done", "req_index": 1440, "soak_elapsed_s": 22113.7, "ts": "2026-07-28T17:29:55Z", "window": 23}
+{"kind": "window_done", "req_index": 1500, "soak_elapsed_s": 23014.7, "ts": "2026-07-28T17:44:56Z", "window": 24}
+{"kind": "window_done", "req_index": 1560, "soak_elapsed_s": 23932.1, "ts": "2026-07-28T18:00:13Z", "window": 25}
+{"kind": "window_done", "req_index": 1620, "soak_elapsed_s": 24858.0, "ts": "2026-07-28T18:15:39Z", "window": 26}
+{"kind": "window_done", "req_index": 1680, "soak_elapsed_s": 25764.9, "ts": "2026-07-28T18:30:46Z", "window": 27}
+{"kind": "window_done", "req_index": 1740, "soak_elapsed_s": 26673.8, "ts": "2026-07-28T18:45:55Z", "window": 28}
+{"kind": "window_done", "req_index": 1800, "soak_elapsed_s": 27563.4, "ts": "2026-07-28T19:00:44Z", "window": 29}
+{"kind": "window_done", "req_index": 1860, "soak_elapsed_s": 28480.8, "ts": "2026-07-28T19:16:02Z", "window": 30}
+{"kind": "window_done", "req_index": 1920, "soak_elapsed_s": 29384.4, "ts": "2026-07-28T19:31:06Z", "window": 31}
+{"kind": "window_done", "req_index": 1980, "soak_elapsed_s": 30291.6, "ts": "2026-07-28T19:46:13Z", "window": 32}
+{"kind": "window_done", "req_index": 2040, "soak_elapsed_s": 31216.3, "ts": "2026-07-28T20:01:37Z", "window": 33}
+{"kind": "window_done", "req_index": 2100, "soak_elapsed_s": 32116.7, "ts": "2026-07-28T20:16:38Z", "window": 34}
+{"kind": "window_done", "req_index": 2160, "soak_elapsed_s": 33027.1, "ts": "2026-07-28T20:31:48Z", "window": 35}
+{"kind": "window_done", "req_index": 2220, "soak_elapsed_s": 33954.2, "ts": "2026-07-28T20:47:15Z", "window": 36}
+{"kind": "window_done", "req_index": 2280, "soak_elapsed_s": 34877.3, "ts": "2026-07-28T21:02:38Z", "window": 37}
+{"kind": "window_done", "req_index": 2340, "soak_elapsed_s": 35802.0, "ts": "2026-07-28T21:18:03Z", "window": 38}
+{"kind": "window_done", "req_index": 2400, "soak_elapsed_s": 36720.5, "ts": "2026-07-28T21:33:22Z", "window": 39}
+{"final_mem": {"node-a": {"avail_mb": 7500, "load1": 4.39, "swap_used_mb": 2768, "total_mb": 124545, "used_mb": 117045}, "node-b": {"avail_mb": 9085, "load1": 1.84, "swap_used_mb": 2622, "total_mb": 124546, "used_mb": 115460}}, "final_metrics": {"http_request_duration_highr_seconds_count": 6708.0, "http_requests_total": 6708.0, "process_resident_memory_bytes": 1439494144.0, "vllm:generation_tokens_total": 863168.0, "vllm:kv_cache_usage_perc": 0.9637004667792234, "vllm:num_preemptions_total": 0.0, "vllm:num_requests_running": 0.0, "vllm:num_requests_waiting": 0.0, "vllm:prompt_tokens_total": 8768497.0, "vllm:request_success_total": 2617.0, "vllm:spec_decode_num_accepted_tokens_total": 592192.0, "vllm:spec_decode_num_draft_tokens_total": 811443.0, "vllm:spec_decode_num_drafts_total": 270484.0}, "halted": false, "kind": "soak_end", "requests": 2400, "soak_elapsed_s": 36720.5, "soak_end": "2026-07-28T21:33:22Z", "soak_start": "2026-07-28T11:21:21Z", "ts": "2026-07-28T21:33:23Z"}

@@ -1,0 +1,99 @@
+========================================================================
+POST-HOC REANALYSIS  turns=2045  metric_scrapes=147
+========================================================================
+
+## 0. WHAT THE EXISTING SCRAPE CADENCE ACTUALLY IS
+turn-index gap between scrapes : set=[14]
+wall-clock gap (min)           : min=4.5 max=6.1 mean=5.3
+-> scrapes are triggered by REQUEST COUNT (every N turns), not wall clock.
+   The wall-clock spacing is a consequence, and it VARIES, which is the
+   signature of a request-triggered cadence rather than a timed one.
+
+## 1. COUNTER RESET CHECK (monotonicity)
+All 6 spec_decode counters strictly non-decreasing across 147 scrapes.
+NO RESET OCCURRED during the run. Every delta is a real delta.
+
+Note on method: a reset corrupts a delta REGARDLESS of whether the window
+boundary is defined by wall clock or by request count. Reset-immunity comes
+from DETECTING the monotonicity violation (this check), not from the choice
+of boundary. Fixed request-count windows buy comparability of window SIZE,
+which is a real and separate benefit.
+
+## 2. ACCEPTANCE OVER FIXED REQUEST-COUNT WINDOWS (200 requests)
+turn window          drafts   accepted   accept%    pos0%    pos1%    pos2%
+[0,196)              118143      76287    64.57%    81.8%    63.9%    48.0%
+[196,392)            120060      76614    63.81%    81.3%    63.0%    47.2%
+[392,588)            115527      74231    64.25%    81.5%    63.6%    47.7%
+[588,798)            125010      80238    64.19%    81.8%    63.5%    47.3%
+[798,994)            115473      74314    64.36%    81.7%    63.7%    47.6%
+[994,1190)           119745      76786    64.12%    81.5%    63.3%    47.5%
+[1190,1400)          123090      79747    64.79%    81.9%    64.1%    48.3%
+[1400,1596)          117066      75424    64.43%    81.8%    63.7%    47.7%
+[1596,1792)          116253      74879    64.41%    81.7%    63.8%    47.8%
+[1792,1988)          112365      72849    64.83%    82.0%    64.1%    48.4%
+[1988,2044)           33294      21310    64.01%    81.0%    63.6%    47.5%
+
+Boundaries are exact scrape turn-indices, printed above; scrapes land every
+14 turns so a 200-request request window snaps to the nearest scrape at or
+below each edge. That snapping is why the boundary is reported, not assumed.
+
+OLD series (146 windows of 14 req): min=61.36 max=69.15 spread=7.80
+NEW series (11 windows of 200 req): min=63.81 max=64.83 spread=1.02
+Both series are flat; the larger window narrows the spread, which is what
+averaging more requests per point is supposed to do. Neither shows a slope.
+
+## 3. PER-FAMILY ACCEPTANCE - IS IT COMPUTABLE FROM THIS LOG?
+Engine spec_decode counters are PROCESS-WIDE cumulative. They carry no
+family label. Attribution needs a window containing only one family.
+
+Family composition of each inter-scrape window (first 4 shown):
+   {'code': 2, 'math': 2, 'prose': 2, 'reasoning': 2, 'structured': 2, 'summarize': 2, 'tool': 2}
+   {'code': 2, 'math': 2, 'prose': 2, 'reasoning': 2, 'structured': 2, 'summarize': 2, 'tool': 2}
+   {'code': 2, 'math': 2, 'prose': 2, 'reasoning': 2, 'structured': 2, 'summarize': 2, 'tool': 2}
+   {'code': 2, 'math': 2, 'prose': 2, 'reasoning': 2, 'structured': 2, 'summarize': 2, 'tool': 2}
+
+Every full window contains all 7 families in EQUAL counts: True
+
+VERDICT: per-family acceptance is NOT computable from this log, and no
+arithmetic on it can recover the split. The workload is round-robin one turn per
+family and the scrape fires every 14 turns = exactly 2 complete cycles, so every
+window is perfectly balanced by construction. The very design choice that makes
+the DRIFT result strong - no family can occupy a contiguous stretch - is what
+destroys family attribution in a process-wide counter.
+
+This is a real limitation of the run, not something to paper over with a
+derived estimate. Reporting a fabricated per-family split here would be worse
+than reporting none.
+
+## 3b. PER-FAMILY DECODE RATE (a PROXY, explicitly not acceptance)
+family            n median tok/s
+tool            292      30.77
+math            292      30.01
+structured      292      29.86
+code            292      27.77
+reasoning       292      26.35
+summarize       292      22.84
+prose           293      20.81
+
+Decode rate is driven by acceptance but is not a measurement of it: it also
+carries prompt length, sampling and scheduler effects. The ~10 tok/s spread
+between structured/math and prose is consistent with a large per-family
+acceptance spread, but the size of that spread cannot be read off these numbers.
+
+## 4. X-02 EMPTY-CONTENT RATE, PER FAMILY
+family         turns   empty  rate_all   think-on  empty_on     rate_on
+reasoning        292      45    15.41%        146        45      30.82%
+code             292      28     9.59%        146        28      19.18%
+structured       292      16     5.48%        146        16      10.96%
+math             292       3     1.03%        146         3       2.05%
+prose            293       0     0.00%        147         0       0.00%
+tool             292       0     0.00%        146         0       0.00%
+summarize        292       0     0.00%        146         0       0.00%
+
+thinking-OFF empty completions: 0 (across 1022 thinking-off turns)
+
+## 4b. IS THE X-02 RATE FLAT OVER THE RUN? (config property vs burn)
+  quartile 1 of thinking-on turns: 26/255 = 10.20%
+  quartile 2 of thinking-on turns: 23/255 = 9.02%
+  quartile 3 of thinking-on turns: 20/255 = 7.84%
+  quartile 4 of thinking-on turns: 23/258 = 8.91%
