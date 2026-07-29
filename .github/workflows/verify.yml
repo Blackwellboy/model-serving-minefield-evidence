@@ -29,11 +29,16 @@ jobs:
           done
 
       - name: whitespace
-        # Check every committed byte against the empty tree. The previous
-        # form was `git diff --check HEAD~1 HEAD || git diff --check`, whose
-        # fallback inspects a clean worktree, returns 0 and masks the real
-        # failure, so the step could never fail.
-        run: git diff --check "$(git hash-object -t tree /dev/null)" HEAD
+        # Scoped to text we author. The previous form was
+        # `git diff --check HEAD~1 HEAD || git diff --check`, whose fallback
+        # inspects a clean worktree, returns 0 and masks the real failure, so
+        # the step could never fail. Fixing it exposed trailing whitespace in
+        # raw-scrubbed/, which is CAPTURED ENGINE OUTPUT. Stripping it would
+        # falsify the raw, which is the one thing those files exist to
+        # preserve, so raw-scrubbed/ is excluded by scope rather than the
+        # check being weakened. Everything we wrote is still checked.
+        run: |
+          git diff --check "$(git hash-object -t tree /dev/null)" HEAD --             . ':(exclude)*/raw-scrubbed/*'
 
       - name: public-surface scan
         run: python3 tools/public_scan.py .
