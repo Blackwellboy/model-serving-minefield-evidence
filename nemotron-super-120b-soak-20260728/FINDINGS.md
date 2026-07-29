@@ -165,7 +165,7 @@ as the rest, and pooling it inflates the distinct-output count from 2 to 3,
 which is exactly the error trap 108 warns against.
 
 The two in-band variants **alternate in both directions** with no ordering, then
-`81a6298f` stops appearing after 7.09h. A burn signature would be monotone - 
+`81a6298f` stops appearing after 7.09h. A burn signature would be monotone -
 progressive shortening, or a one-way transition. This is neither.
 
 **A naive burn detector comparing consecutive canaries would have fired six

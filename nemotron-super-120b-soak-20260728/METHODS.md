@@ -53,7 +53,7 @@ Readiness was a **completed generation**, never `/v1/models`. Recorded for
 contrast: `/v1/models` returned HTTP 200 while the model was still loading. The
 same trap has produced a false pass twice on this fleet.
 
-Cold start: launched 07:43:26Z, `Application startup complete` 07:53:47Z - 
+Cold start: launched 07:43:26Z, `Application startup complete` 07:53:47Z -
 **10m40s**, against ~11m14s recorded previously for the same line. Weights are
 read three times (main + draft init); only the first pass is slow (7m29s, then
 1m09s, 1m09s).
