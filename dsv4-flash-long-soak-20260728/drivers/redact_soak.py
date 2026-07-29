@@ -79,11 +79,16 @@ def main():
     a = ap.parse_args()
     nmap = json.load(open(a.map, encoding="utf-8"))
 
-    rows, ok = [], True
+    rows, ok, missing = [], True, []
     for rel in JSONL:
         sp = os.path.join(a.src, rel)
         if not os.path.exists(sp):
-            print("MISSING (skipped): %s" % rel)
+            # A skipped file is a dropped file. Printing "skipped" and exiting 0
+            # would let this tool report "no record dropped" over a bundle that
+            # silently lost an entire source, which is the one guarantee it
+            # exists to make.
+            print("MISSING (FATAL): %s" % rel)
+            missing.append(rel)
             continue
         dp = os.path.join(a.dst, rel)
         os.makedirs(os.path.dirname(dp), exist_ok=True)
@@ -100,8 +105,13 @@ def main():
     for rel, x, y in rows:
         print("%-34s %8d %8d%s" % (rel, x, y, "" if x == y else "   <-- MISMATCH"))
         ok &= (x == y)
+    if missing:
+        print("")
+        print("%d REQUIRED SOURCE FILE(S) MISSING: %s"
+              % (len(missing), ", ".join(missing)))
+        ok = False
     print("\n" + ("All record counts preserved. No record dropped."
-                  if ok else "RECORD COUNT MISMATCH"))
+                  if ok else "SCRUB FAILED: counts changed or sources missing"))
     return 0 if ok else 1
 
 

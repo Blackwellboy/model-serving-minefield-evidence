@@ -145,14 +145,24 @@ is for any family.
 
 ## 6. Burn detector - bistable, not degrading
 
-26 canaries, identical prompt, temperature 0, fixed seed, thinking off. Exactly
-**3 distinct outputs**:
+**Corrected 2026-07-29.** This table previously read 22 and 3 while listing
+**four** timestamps for the variant it called 3, and pooled the out-of-band
+t~0 reference into the distinct-output count. Both are fixed below and the
+counts now match `verify.py` and trap 108. Re-derived from `raw/canary.jsonl`.
+
+**25 in-band canaries**, identical prompt, temperature 0, fixed seed, thinking
+off. Exactly **2 distinct outputs**:
 
 | sha256[:12] | chars | occurrences |
 |---|---|---|
-| `7e776e9bd5e2` | 356 | 22 |
-| `81a6298f36c3` | 346 | 3 (at 2.02h, 2.53h, 4.55h, 7.09h) |
-| `2f97d795fd1d` | 426 | 1 (t~0, out-of-band reference) |
+| `7e776e9bd5e2` | 356 | **21** |
+| `81a6298f36c3` | 346 | **4** (at 2.02h, 2.53h, 4.55h, 7.09h) |
+
+A **third** output, `2f97d795fd1d` (426 chars), came from the out-of-band t~0
+reference fired before the series. It is recorded separately rather than
+merged: a first request on a freshly warmed engine is not the same condition
+as the rest, and pooling it inflates the distinct-output count from 2 to 3,
+which is exactly the error trap 108 warns against.
 
 The two in-band variants **alternate in both directions** with no ordering, then
 `81a6298f` stops appearing after 7.09h. A burn signature would be monotone - 

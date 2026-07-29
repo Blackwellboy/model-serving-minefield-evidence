@@ -80,14 +80,14 @@ print("\n[prefix cache reuse]")
 pc = [json.loads(l) for l in open(os.path.join(RAW, "positive_control.jsonl"), encoding="utf-8") if l.strip()]
 lag = []
 for n in ("deep.jsonl", "decisive.jsonl", "mnbt4096.jsonl"):
-    p = os.path.join(RAW, "laguna", n)
-    if os.path.exists(p):
-        lag += [json.loads(l) for l in open(p, encoding="utf-8") if l.strip()]
+    lag += load(os.path.join("laguna", n))
 cold = [r for r in lag if r.get("arm") == "cold" and r.get("hit_fraction") is not None]
+# Absence is a failure, not a skip. Exiting 0 with "ALL PUBLISHED NUMBERS
+# REPRODUCED" while quietly not checking a published headline number is the
+# false-green these studies are partly about.
+eq("cold-arm rows available", len(cold) > 0, True)
 if cold:
     eq("cold-arm prefix hit fraction, max", max(r["hit_fraction"] for r in cold), 0.0)
-else:
-    print("  (no cold-arm hit_fraction rows present)")
 
 print("\n%d checks, %d failed" % (checks, len(fails)))
 if fails:

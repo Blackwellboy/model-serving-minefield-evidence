@@ -29,7 +29,11 @@ jobs:
           done
 
       - name: whitespace
-        run: git diff --check HEAD~1 HEAD || git diff --check
+        # Check every committed byte against the empty tree. The previous
+        # form was `git diff --check HEAD~1 HEAD || git diff --check`, whose
+        # fallback inspects a clean worktree, returns 0 and masks the real
+        # failure, so the step could never fail.
+        run: git diff --check "$(git hash-object -t tree /dev/null)" HEAD
 
       - name: public-surface scan
         run: python3 tools/public_scan.py .

@@ -5,7 +5,7 @@ ed7dfc4617238597a383cb56d6c129d2f2d90eb3813200bc0582a069cc4f0c03  ./README.md
 702a0577a19a604280663db0cf97fbef53ad4f7c83e122bcb6336e6a7c1361e4  ./analysis/FULL_ANALYSIS.txt
 1a34d3ad515c3102e43bead6f6542728a2411fe2446af2abb3a15c9b888204ee  ./drivers/analyze.py
 6ce58b7c59a1582dcecd98b9470e2dcd572002c56cab52020b54b5a5daf9bd41  ./drivers/pc_probe.py
-0485fd90a3b934b86da1c272bf8dd2122f82335703006bee00e70e7c57f3c67e  ./drivers/redact_soak.py
+9a26fb87a721782e0d1575582bac3fd11bd3542b21930e32bdfb46d861ffe9c5  ./drivers/redact_soak.py
 eab36940a514447924c13cf4d96ab36a14bf9dea749e1501d1d8e0d7f627ea2f  ./drivers/sampler.py
 d48a0dbde8bec4544ab1628ebe9015970f7974be4e2d274968831d4de8ee637c  ./drivers/soak.py
 d3485dc9dbb1d95851803874bfe2245b699c34ed098a574e96088b5acfecd5ba  ./proofs/README.md
@@ -27,4 +27,4 @@ e706c659c9689d0ae90a46067cb51c5974031c70687ca5ef710381865d1108bc  ./raw-scrubbed
 53bf45df3b9dd4bef45932f6d52dc3d800de5b1483573a4b6c099fb25c5a379e  ./raw-scrubbed/smoke2/raw/turns.jsonl
 b301eac33da58ee8a82c2bdf2aed933520485850f5268a3cd5abcd9dfe9a20d0  ./raw-scrubbed/smoke2/raw/windows.jsonl
 d674c25a23edd20d4f5e3503eab9cc3c8c12b75045ad498040d0843a8c8635a3  ./raw-scrubbed/smoke3/raw/turns.jsonl
-f5a6f6d30401afb9a94bebf01577d6fdbeeb3e19731db577f8df5ba85d408939  ./verify.py
+bddb3899eb4cb0251c251012238077511c2b2039bdb6ceba71b7a8a677d9a7c4  ./verify.py
