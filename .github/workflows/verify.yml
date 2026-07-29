@@ -1,0 +1,47 @@
+name: verify
+on:
+  push:
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: DSV4 verifier
+        working-directory: dsv4-flash-long-soak-20260728
+        run: python3 verify.py
+
+      - name: Nemotron verifier
+        working-directory: nemotron-super-120b-soak-20260728
+        run: python3 verify.py
+
+      - name: checksums
+        run: |
+          set -e
+          for d in dsv4-flash-long-soak-20260728 nemotron-super-120b-soak-20260728; do
+            echo "== $d =="
+            (cd "$d" && sha256sum -c SHA256SUMS --quiet)
+          done
+
+      - name: whitespace
+        # Scoped to text we author. The previous form was
+        # `git diff --check HEAD~1 HEAD || git diff --check`, whose fallback
+        # inspects a clean worktree, returns 0 and masks the real failure, so
+        # the step could never fail. Fixing it exposed trailing whitespace in
+        # raw-scrubbed/, which is CAPTURED ENGINE OUTPUT. Stripping it would
+        # falsify the raw, which is the one thing those files exist to
+        # preserve. The same applies to analysis/*.txt, which is captured
+        # tool stdout. Both are excluded by SCOPE rather than the check
+        # being weakened: every markdown, python and yaml file we wrote is
+        # still checked, and that was verified by adding a trailing space to
+        # an authored file and watching this form fail.
+        run: |
+          git diff --check "$(git hash-object -t tree /dev/null)" HEAD --             . ':(exclude)*/raw-scrubbed/*' ':(exclude)*/analysis/*.txt'
+
+      - name: public-surface scan
+        run: python3 tools/public_scan.py .
